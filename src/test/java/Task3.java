@@ -2,14 +2,29 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class MainTest {
-    public static void main(String[] args) throws InterruptedException {
-        WebDriver driver = new ChromeDriver();
-        WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(5));
+public class Task3 {
+    public static WebDriver driver;
+    public static WebDriverWait webDriverWait;
 
+    @BeforeTest
+    public static void init(){
+        driver = new ChromeDriver();
+        webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(5));
+    }
+
+    @AfterTest
+    public static void tearDown(){
+        driver.quit();
+    }
+
+    @Test
+    public static void test1() throws InterruptedException {
         // Step 1: Open Google Cloud Home Page
         driver.get("https://cloud.google.com/");
         driver.manage().window().maximize();
@@ -39,12 +54,8 @@ public class MainTest {
 
         // Step 9-15: Email estimate and validate
         calculatorPage.emailEstimate();
-
-
         YopMailPage yopMailPage = new YopMailPage(driver, webDriverWait);
-
         String firstWindow = driver.getWindowHandles().stream().findFirst().get();
-
         yopMailPage.openYopMailPage();
         String secondWindow = "";
         for (String window : driver.getWindowHandles()) {
@@ -60,12 +71,12 @@ public class MainTest {
         calculatorPage.switchToCalculatorPage(firstWindow);
         calculatorPage.sendEmailEstimate(emailInbox + "@yopmail.com");
         yopMailPage.switchToYopMailPage(secondWindow);
+
         //Wait 30 seconds to receive the email
         Thread.sleep(10000);
         yopMailPage.refreshPage();
         float totalCostFromEmail = yopMailPage.getTotalCostFromEmail();
         Assert.assertEquals(cost, totalCostFromEmail);
-        // Close the browser
-        driver.quit();
+
     }
 }
