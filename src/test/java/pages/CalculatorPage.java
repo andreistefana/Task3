@@ -1,3 +1,5 @@
+package pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +15,7 @@ public class CalculatorPage {
     private final By seriesCheckBox = By.cssSelector("md-select[placeholder=\"Series\"]>md-select-value[class=\"md-select-value\"]");
     private final By seriesValue = By.cssSelector("md-option[value=\"n1\"]");
     private final By machineTypeCheckBox = By.cssSelector("md-select[placeholder=\"Instance type\"]>md-select-value[class=\"md-select-value\"]");
-    private final By machineTypeValue = By.cssSelector("md-option[value=\"CP-COMPUTEENGINE-VMIMAGE-N1-STANDARD-4\"] > div.md-text.ng-binding");
+    private final By machineTypeValue = By.cssSelector("md-option[value=\"CP-COMPUTEENGINE-VMIMAGE-N1-STANDARD-8\"] > div.md-text.ng-binding");
     private final By localSSD = By.cssSelector("md-select[placeholder=\"Local SSD\"]>md-select-value[class=\"md-select-value\"]");
     private final By GPUSelector = By.cssSelector("md-input-container>md-checkbox[ng-model=\"listingCtrl.computeServer.addGPUs\"]");
     private final By GPUType = By.cssSelector("md-select[aria-label=\"GPU type\"]");

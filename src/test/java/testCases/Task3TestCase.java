@@ -1,3 +1,5 @@
+package testCases;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -5,10 +7,14 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import pages.CalculatorPage;
+import pages.GoogleCloudHomePage;
+import pages.SearchResultPage;
+import pages.YopMailPage;
 
 import java.time.Duration;
 
-public class Task3 {
+public class Task3TestCase {
     public static WebDriver driver;
     public static WebDriverWait webDriverWait;
 
@@ -48,7 +54,7 @@ public class Task3 {
         calculatorPage.addToEstimate();
         String totalCost = calculatorPage.getTotalCost();
 
-        float cost = Float.parseFloat(totalCost.split("USD ", 2)[1].split(" per")[0]);
+        float cost = Float.parseFloat(totalCost.split("USD ", 2)[1].split(" per")[0].replace(",",""));
         Assert.assertTrue(cost > 0);
         System.out.println("Total Estimated Cost: " + cost);
 

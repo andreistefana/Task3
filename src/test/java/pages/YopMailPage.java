@@ -1,3 +1,5 @@
+package pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -57,7 +59,7 @@ public class YopMailPage {
         WebElement iframe = driver.findElement(iframeSelector);
         driver.switchTo().frame(iframe);
         WebElement totalCostElement = driver.findElement(totalCostSelector);
-        String totalCost = totalCostElement.getText().split("USD ")[1];
+        String totalCost = totalCostElement.getText().split("USD ")[1].replace(",","");
         return Float.parseFloat((totalCost));
     }
 }
